@@ -1,12 +1,15 @@
 import ExpenseForm from "~/components/expenses/ExpenseForm";
 import ExpenseList from "~/components/expenses/ExpensesList";
 import expensesStyles from "~/styles/expenses.css";
+import Modal from "~/components/util/Modal";
 import DUMMY_EXPENSES from "../data/dummy-expenses";
 
 export default function ExpensesAddPage() {
   return (
     <>
-      <ExpenseForm />
+      <Modal onClose={() => console.log("")}>
+        <ExpenseForm />
+      </Modal>
       <ExpenseList expenses={DUMMY_EXPENSES} />
     </>
   );
