@@ -17,3 +17,5 @@ model Expense {
   date      DateTime
   dateAdded DateTime @default(now())
 }
+
+// npx prisma generate
