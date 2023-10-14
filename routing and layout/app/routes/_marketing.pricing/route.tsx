@@ -1,15 +1,4 @@
 import PricingPlan from "~/components/marketing/PricingPlan";
-// import { FaTrophy, FaHandshake } from 'react-icons/fa';
-import pricingStyles from "~/styles/marketing.css";
-
-export function links() {
-  return [
-    {
-      rel: "stylesheet",
-      href: pricingStyles,
-    },
-  ];
-}
 
 export function meta() {
   return [

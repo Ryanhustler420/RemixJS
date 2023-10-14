@@ -7,7 +7,9 @@ export default function ExpensesLayout() {
   return (
     <>
       <Outlet />
-      <ExpensesList expenses={DUMMY_EXPENSES} />
+      <main>
+        <ExpensesList expenses={DUMMY_EXPENSES} />
+      </main>
     </>
   );
 }
