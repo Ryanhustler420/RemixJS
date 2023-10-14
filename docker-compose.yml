@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+
+  application:
+    build:
+      dockerfile: Dockerfile
+      context: ./data-fetching-and-mutations
+    ports:
+      - 3000:3000
+      - 8002:8002
+    environment:
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+      - MONGO_URL=mongodb
+    volumes:
+      - ./data-fetching-and-mutations:/app
+      - /app/node_modules/
+      - /app/build/
+      - /app/public/build/
+
+  mongodb:
+    image: mongo
+    hostname: mongodb
+    restart: unless-stopped
+    volumes:
+      - appname:/data/db/appname
+    ports:
+      - "27017:27017"
+
+volumes:
+  appname:
