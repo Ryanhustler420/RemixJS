@@ -5,7 +5,6 @@ import ExpenseList from "~/components/expenses/ExpensesList";
 export default function ExpensesPage() {
   return (
     <>
-      <h1>Expenses Page</h1>
       <ExpenseList expenses={DUMMY_EXPENSES} />
     </>
   );
