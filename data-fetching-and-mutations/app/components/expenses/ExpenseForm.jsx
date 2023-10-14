@@ -1,26 +1,29 @@
-import { Link, useActionData, useSubmit } from "@remix-run/react";
+import { Form, Link, useActionData, useNavigation } from "@remix-run/react";
 
 function ExpenseForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
   const validationErrors = useActionData();
-  const submit = useSubmit();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state !== 'idle';
 
-  function submitHandler(event) {
-    event.preventDefault();
-    // perfrom your own validation
-    // ...
-    submit(event.target, {
-      // action: '/expenses/add'
-      method: 'post',
-    });
-  }
+  // const submit = useSubmit();
+
+  // function submitHandler(event) {
+  //   event.preventDefault();
+  //   // perfrom your own validation
+  //   // ...
+  //   submit(event.target, {
+  //     // action: '/expenses/add'
+  //     method: 'post',
+  //   });
+  // }
 
   return (
-    <form 
+    <Form 
       method="post" 
       className="form" 
       id="expense-form"
-      onSubmit={submitHandler}
+      // onSubmit={submitHandler}
       >
       <p>
         <label htmlFor="title">Expense Title</label>
@@ -50,11 +53,11 @@ function ExpenseForm() {
           )))}
       </ul>}
       <div className="form-actions">
-        <button>Save Expense</button>
+        <button disabled={isSubmitting}>{isSubmitting ? 'Saving...' : 'Save Expense'}</button>
         <Link to="/expenses">Cancel</Link>
         {/* <Link to="..">Cancel</Link> */}
       </div>
-    </form>
+    </Form>
   );
 }
 
