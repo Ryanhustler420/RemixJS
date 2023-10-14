@@ -3,11 +3,19 @@ import ExpenseList from "~/components/expenses/ExpensesList";
 import expensesStyles from "~/styles/expenses.css";
 import DUMMY_EXPENSES from "../data/dummy-expenses";
 import Modal from "~/components/util/Modal";
+import { useNavigate } from "@remix-run/react";
 
 export default function UpdateExpensesPage() {
+  const navigate = useNavigate();
+
+  function closeHandler() {
+    navigate('/expenses');
+    // navigate('..')
+  }
+
   return (
     <>
-      <Modal onClose={() => console.log("")}>
+      <Modal onClose={closeHandler}>
         <ExpenseForm />
       </Modal>
       <ExpenseList expenses={DUMMY_EXPENSES} />
