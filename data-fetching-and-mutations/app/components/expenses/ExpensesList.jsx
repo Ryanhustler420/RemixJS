@@ -1,4 +1,4 @@
-import ExpenseListItem from './ExpenseListItem';
+import ExpenseListItem from '~/components/expenses/ExpenseListItem';
 
 function ExpensesList({ expenses }) {
 

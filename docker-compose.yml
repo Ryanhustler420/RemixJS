@@ -8,6 +8,8 @@ services:
     ports:
       - 3000:3000
       - 8002:8002
+    depends_on:
+      - mongodb
     environment:
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true

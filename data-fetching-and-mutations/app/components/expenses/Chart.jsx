@@ -1,4 +1,4 @@
-import ChartBar from './ChartBar';
+import ChartBar from '~/components/expenses/ChartBar';
 
 function Chart({ expenses }) {
   const chartDataPoints = [
