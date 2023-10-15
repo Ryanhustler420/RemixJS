@@ -53,3 +53,9 @@ export function meta() {
     },
   ];
 }
+
+export function headers({ loaderHeaders, parentHeaders }) {
+  return {
+    'Cache-Control': parentHeaders.get('Cache-Control'),
+  }
+}

@@ -1,6 +1,12 @@
 import { MetaFunction } from "@remix-run/node";
 import PricingPlan from "~/components/marketing/PricingPlan";
 
+export function headers({ loaderHeaders, parentHeaders }) {
+  return {
+    'Cache-Control': parentHeaders.get('Cache-Control'),
+  }
+}
+
 export const meta: MetaFunction = ({ params, location , data }) => { // window.location
   return [
     { title: "Remix Expenses - The complete app" },

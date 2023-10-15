@@ -8,6 +8,12 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export function headers({ loaderHeaders, parentHeaders }) {
+  return {
+    'Cache-Control': parentHeaders.get('Cache-Control'),
+  }
+}
+
 export default function Index() {
   const navigation = useNavigation();
   const isRedirecting = navigation.state != "idle";
