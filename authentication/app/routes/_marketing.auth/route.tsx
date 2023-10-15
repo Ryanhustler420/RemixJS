@@ -1,6 +1,7 @@
 import authStyles from "~/styles/auth.css";
 import AuthForm from '~/components/auth/AuthForm';
 import { ActionFunction } from "@remix-run/node";
+import { validateCredentials } from "~/data/validation.server";
 
 export default function AuthPage() {
   return (
@@ -15,7 +16,11 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const credential = Object.fromEntries(formData);
   
-  // Validate user input
+  try {
+    validateCredentials(credential);
+  } catch (error) {
+    return error;
+  }
 
   if (authMode === 'login') {
     // login logic
