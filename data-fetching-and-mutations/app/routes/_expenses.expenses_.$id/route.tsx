@@ -1,6 +1,6 @@
 import ExpenseForm from "~/components/expenses/ExpenseForm";
 import Modal from "~/components/util/Modal";
-import { updateExpense } from "~/data/expenses.server";
+import { deleteExpense, updateExpense } from "~/data/expenses.server";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { validateExpenseInput } from "~/data/validation.server";
 import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
@@ -31,16 +31,22 @@ export default function UpdateExpensesPage() {
 // };
 
 export const action: ActionFunction = async ({ request, params }) => {
-  const formData = await request.formData();
   const expenseId = params.id;
-  const expenseData = Object.fromEntries(formData);
-
-  try {
-    validateExpenseInput(expenseData);
-  } catch (error) {
-    return error;
+  switch (request.method) {
+    case "PATCH": {
+      const formData = await request.formData();
+      const expenseData = Object.fromEntries(formData);
+      try {
+        validateExpenseInput(expenseData);
+      } catch (error) {
+        return error;
+      }
+      await updateExpense(expenseId, expenseData);
+      return redirect("/expenses");
+    }
+    case "DELETE": {
+      await deleteExpense(expenseId);
+      return redirect("/expenses");
+    }
   }
-
-  await updateExpense(expenseId, expenseData);
-  return redirect("/expenses");
 };
