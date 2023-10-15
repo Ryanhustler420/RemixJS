@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import { Link, useNavigation } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,6 +9,9 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const navigation = useNavigation();
+  const isRedirecting = navigation.state != "idle";
+
   return (
     <main>
       <section className="marketing-section">
@@ -27,7 +30,7 @@ export default function Index() {
             <p>Manage your expenses in one central place.</p>
             <p>
               <Link className="cta" to="/expenses">
-                <span>Get Started</span>
+                <span>{isRedirecting ? "Loading..." : "Get Started"}</span>
                 {/* <FaArrowRight /> */}
               </Link>
             </p>

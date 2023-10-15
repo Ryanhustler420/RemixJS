@@ -1,7 +1,9 @@
 import ExpenseForm from "~/components/expenses/ExpenseForm";
 import Modal from "~/components/util/Modal";
+import { updateExpense } from "~/data/expenses.server";
 import { useLoaderData, useNavigate } from "@remix-run/react";
-import { LoaderFunction } from "@remix-run/node";
+import { validateExpenseInput } from "~/data/validation.server";
+import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
 // import { getExpense } from "~/data/expenses.server";
 
 export default function UpdateExpensesPage() {
@@ -27,3 +29,18 @@ export default function UpdateExpensesPage() {
 
 //   return expense; // json(expense)
 // };
+
+export const action: ActionFunction = async ({ request, params }) => {
+  const formData = await request.formData();
+  const expenseId = params.id;
+  const expenseData = Object.fromEntries(formData);
+
+  try {
+    validateExpenseInput(expenseData);
+  } catch (error) {
+    return error;
+  }
+
+  await updateExpense(expenseId, expenseData);
+  return redirect("/expenses");
+};
