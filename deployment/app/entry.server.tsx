@@ -57,6 +57,7 @@ function handleBotRequest(
           const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
+          // responseHeaders.set("X-My-Header", "Some value"); all pages
 
           resolve(
             new Response(stream, {

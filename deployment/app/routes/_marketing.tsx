@@ -32,3 +32,10 @@ export function meta() {
     description: "Manage your expenses with ease",
   }]
 }
+
+// in production if this page was updated then it will reflact to user after 60 minutes
+export function headers({ loaderHeaders, parentHeaders }) {
+  return {
+    'Cache-Control': 'max-age=300, s-maxage=3600', // 60 Minutes
+  }
+}
