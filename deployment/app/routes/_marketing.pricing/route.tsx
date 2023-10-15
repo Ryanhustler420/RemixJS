@@ -1,13 +1,19 @@
+import { MetaFunction } from "@remix-run/node";
 import PricingPlan from "~/components/marketing/PricingPlan";
 
-export function meta() {
+export const meta: MetaFunction = ({ params, location , data }) => { // window.location
   return [
+    { title: "Remix Expenses - The complete app" },
     {
-      title: "Pricing",
-      description: "Find out perfect course for your journey",
+      property: "og:title",
+      content: "Pricing",
+    },
+    {
+      name: "description",
+      content: "Friendly pricese for your need",
     },
   ];
-}
+};
 
 const PRICING_PLANS = [
   {

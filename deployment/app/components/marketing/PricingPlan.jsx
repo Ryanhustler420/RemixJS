@@ -4,7 +4,7 @@ function PricingPlan({ title, price, perks, icon }) {
     <article>
       <header>
         <div className="icon">
-          <Icon />
+          {/* <Icon /> */}
         </div>
         <h2>{title}</h2>
         <p>{price}</p>

@@ -25,3 +25,10 @@ export function links() {
     },
   ];
 }
+
+export function meta() {
+  return [{
+    title: "Remix Expenses - The complete app",
+    description: "Manage your expenses with ease",
+  }]
+}

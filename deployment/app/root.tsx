@@ -1,5 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   Link,
@@ -24,7 +24,7 @@ function Document({ title, children }) {
   return (
     <html lang="en">
       <head>
-        <title>{title}</title>
+        {/* {title && <title>{title}</title>} */}
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
@@ -80,3 +80,17 @@ export default function App() {
     </Document>
   );
 }
+
+export const meta: MetaFunction = ({ location, params, data }) => {
+  return [
+    { title: "Remix Expenses - The complete app" },
+    {
+      property: "og:title",
+      content: "Remix Expenses - The complete app",
+    },
+    {
+      name: "description",
+      content: "Manage your expenses with ease",
+    },
+  ];
+};

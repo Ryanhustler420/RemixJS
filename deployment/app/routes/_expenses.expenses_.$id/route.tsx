@@ -3,7 +3,12 @@ import Modal from "~/components/util/Modal";
 import { deleteExpense, updateExpense } from "~/data/expenses.server";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { validateExpenseInput } from "~/data/validation.server";
-import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
+import {
+  ActionFunction,
+  LoaderFunction,
+  MetaFunction,
+  redirect,
+} from "@remix-run/node";
 // import { getExpense } from "~/data/expenses.server";
 
 export default function UpdateExpensesPage() {
@@ -50,4 +55,11 @@ export const action: ActionFunction = async ({ request, params }) => {
       return { deletedId: expenseId };
     }
   }
+};
+
+export const meta: MetaFunction = ({ params, location, data, matches }) => {
+  if (!matches) return [];
+  const expenses = matches.find(match => match.id === 'routes/_expenses').data;
+  const expenseData = expenses.find(expense => expense.id == params.id);
+  return [{ title: `Remix - ${expenseData.title}` }];
 };
