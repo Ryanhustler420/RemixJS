@@ -2,7 +2,7 @@ import ExpenseForm from "~/components/expenses/ExpenseForm";
 import Modal from "~/components/util/Modal";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { LoaderFunction } from "@remix-run/node";
-import { getExpense } from "~/data/expenses.server";
+// import { getExpense } from "~/data/expenses.server";
 
 export default function UpdateExpensesPage() {
   const navigate = useNavigate();
@@ -21,9 +21,9 @@ export default function UpdateExpensesPage() {
   );
 }
 
-export const loader: LoaderFunction = async ({ params, request }) => {
-  const expenseId = params.id;
-  const expense = await getExpense(expenseId);
+// export const loader: LoaderFunction = async ({ params, request }) => {
+//   const expenseId = params.id;
+//   const expense = await getExpense(expenseId);
 
-  return expense; // json(expense)
-};
+//   return expense; // json(expense)
+// };
