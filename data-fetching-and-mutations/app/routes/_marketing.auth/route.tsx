@@ -15,11 +15,15 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const credential = Object.fromEntries(formData);
   
+  // Validate user input
+
   if (authMode === 'login') {
     // login logic
   } else {
     // signup logic (create user)
   }
+
+  return null;
 }
 
 export function links() {
