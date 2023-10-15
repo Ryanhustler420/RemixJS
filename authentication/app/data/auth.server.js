@@ -1,7 +1,20 @@
+import { createCookieSessionStorage } from '@remix-run/node';
 import pkg from "bcryptjs";
 const { hash, compare } = pkg;
 
 import { prisma } from "./database.server";
+
+const SESSION_SECRET = process.env.SESSION_SECRET;
+
+const sessionStorage = createCookieSessionStorage({
+  cookie: {
+    secure: process.env.NODE_ENV  === 'production',
+    secrets: [SESSION_SECRET],
+    sameSite: 'lax',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    httpOnly: true // client side js can't access this cookie
+  }
+});
 
 export async function signup({ email, password }) {
   const existingUser = await prisma.user.findFirst({ where: { email } });
@@ -38,4 +51,7 @@ export async function login({ email, password }) {
     error.status = 401;
     throw error;
   }
+
+
+
 }
