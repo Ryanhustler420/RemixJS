@@ -10,6 +10,11 @@ function ExpenseForm() {
   const expenseData = expenses.find(expense => expense.id == params.id);
   const isSubmitting = navigation.state !== 'idle';
 
+  if (params.ud && !expenseData) {
+    return <p>Invalid expense id.</p>;
+    // throw new Response();
+  }
+
   const defaultValues = expenseData ? { 
     title: expenseData.title,
     amount: expenseData.amount,
