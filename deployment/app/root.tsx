@@ -6,6 +6,7 @@ import {
   Meta,
   Outlet,
   Scripts,
+  useMatches,
   LiveReload,
   useRouteError,
   ScrollRestoration,
@@ -21,6 +22,9 @@ export const links: LinksFunction = () => [
 ];
 
 function Document({ title, children }) {
+  const matches = useMatches();
+  const doNotUseJS = matches.some((match) => match.handle?.disableJS);
+
   return (
     <html lang="en">
       <head>
@@ -33,7 +37,7 @@ function Document({ title, children }) {
       <body>
         {children}
         <ScrollRestoration />
-        <Scripts />
+        {!doNotUseJS && <Scripts />}
         <LiveReload />
       </body>
     </html>

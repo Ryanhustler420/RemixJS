@@ -39,3 +39,5 @@ export function headers({ loaderHeaders, parentHeaders }) {
     'Cache-Control': 'max-age=300, s-maxage=3600', // 60 Minutes
   }
 }
+
+export const handle = { disableJS: true }; // {doNotUseJS: true}

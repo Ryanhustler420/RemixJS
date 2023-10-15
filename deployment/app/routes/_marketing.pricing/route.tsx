@@ -57,3 +57,5 @@ export default function PricingPage() {
     </main>
   );
 }
+
+export const handle = { disableJS: true };
