@@ -1,5 +1,5 @@
 {
-  "name": "data-fetching-and-mutations",
+  "name": "authentication",
   "private": true,
   "sideEffects": false,
   "type": "module",
