@@ -1,10 +1,13 @@
 import ExpensesHeader from "~/components/navigation/ExpensesHeader";
 import ExpensesList from "~/components/expenses/ExpensesList";
-import DUMMY_EXPENSES from "~/routes/data/dummy-expenses";
+import { getExpenses } from "~/data/expenses.server";
 import expensesStyles from "~/styles/expenses.css";
-import { Link, Outlet } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { LoaderFunction } from "@remix-run/node";
 
 export default function ExpensesLayout() {
+  const expenses = useLoaderData();
+
   return (
     <>
       <ExpensesHeader />
@@ -18,11 +21,15 @@ export default function ExpensesLayout() {
             <span>Load Raw Data</span>
           </a>
         </section>
-        <ExpensesList expenses={DUMMY_EXPENSES} />
+        <ExpensesList expenses={expenses} />
       </main>
     </>
   );
 }
+
+export const loader: LoaderFunction = async ({ params, request }) => {
+  return getExpenses();
+};
 
 export function links() {
   return [{ rel: "stylesheet", href: expensesStyles }];
