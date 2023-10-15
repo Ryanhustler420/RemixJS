@@ -3,7 +3,7 @@ import ExpensesList from "~/components/expenses/ExpensesList";
 import { getExpenses } from "~/data/expenses.server";
 import expensesStyles from "~/styles/expenses.css";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
-import { LoaderFunction } from "@remix-run/node";
+import { LoaderFunction, json } from "@remix-run/node";
 import { requireUserSession } from "~/data/auth.server";
 
 export default function ExpensesLayout() {
@@ -40,9 +40,20 @@ export default function ExpensesLayout() {
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   const userId = await requireUserSession(request);
-  return getExpenses(userId);
+  const expenses = await getExpenses(userId);
+  return json(expenses, {
+    headers: {
+      "Cache-Control": "max-age=3",
+    },
+  });
 };
 
 export function links() {
   return [{ rel: "stylesheet", href: expensesStyles }];
+}
+
+export function headers({ loaderHeaders, parentHeaders }) {
+  return {
+    "Cache-Control": loaderHeaders.get("Cache-Control"),
+  };
 }
