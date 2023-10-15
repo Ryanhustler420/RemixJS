@@ -1,6 +1,6 @@
 import authStyles from "~/styles/auth.css";
-import { signup } from "~/data/auth.server";
 import AuthForm from "~/components/auth/AuthForm";
+import { login, signup } from "~/data/auth.server";
 import { ActionFunction, redirect } from "@remix-run/node";
 import { validateCredentials } from "~/data/validation.server";
 
@@ -23,14 +23,13 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     if (authMode === "login") {
-      // login logic
+      return await login({ email: credential.email, password: credential.password });
     } else {
-      await signup({ email: credential.email, password: credential.password });
-      return redirect("/expenses");
+      return await signup({ email: credential.email, password: credential.password });
     }
-  } catch(error) {
+  } catch (error) {
     return {
-      credentials: error?.message
+      credentials: error?.message,
     };
   }
 
