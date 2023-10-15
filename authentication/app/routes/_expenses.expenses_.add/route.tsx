@@ -24,6 +24,7 @@ export default function ExpensesAddPage() {
 
 // GET
 export const loader: LoaderFunction = async ({ params, request }) => {
+  console.log("ADD LOADER WILL BE CALLED EVEN IF ROUTE IS PROTECTED");
   return null;
 };
 

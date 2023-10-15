@@ -4,6 +4,7 @@ import { getExpenses } from "~/data/expenses.server";
 import expensesStyles from "~/styles/expenses.css";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { LoaderFunction } from "@remix-run/node";
+import { requireUserSession } from "~/data/auth.server";
 
 export default function ExpensesLayout() {
   const expenses: [] = useLoaderData();
@@ -38,6 +39,7 @@ export default function ExpensesLayout() {
 }
 
 export const loader: LoaderFunction = async ({ params, request }) => {
+  await requireUserSession(request);
   return getExpenses();
 };
 
