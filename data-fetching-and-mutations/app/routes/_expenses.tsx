@@ -6,7 +6,7 @@ import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { LoaderFunction } from "@remix-run/node";
 
 export default function ExpensesLayout() {
-  const expenses = useLoaderData();
+  const expenses: [] = useLoaderData();
 
   const hasExpenses = expenses && expenses?.length > 0;
 

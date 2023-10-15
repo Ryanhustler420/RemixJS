@@ -1,12 +1,15 @@
 import ExpenseStatistics from "~/components/expenses/ExpenseStatistics";
-import DUMMY_EXPENSES from "~/routes/data/dummy-expenses";
 import Chart from "~/components/expenses/Chart";
+import { useMatches } from "@remix-run/react";
 
 export default function ExpensesAnalysisPage() {
+  const matches = useMatches();
+  const expenses = matches.find(match => match.id === 'routes/_expenses')?.data;
+
   return (
     <main>
-      <Chart expenses={DUMMY_EXPENSES} />
-      <ExpenseStatistics expenses={DUMMY_EXPENSES} />
+      <Chart expenses={expenses} />
+      <ExpenseStatistics expenses={expenses} />
     </main>
   );
 }

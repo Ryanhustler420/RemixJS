@@ -4,13 +4,13 @@ function ExpenseForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
   const validationErrors = useActionData();
   const navigation = useNavigation();
-  const params = useParams();
+  const params = useParams(); // gives only the path varibale in a file like $id
   const matches = useMatches();
   const expenses = matches.find(match => match.id === 'routes/_expenses').data;
   const expenseData = expenses.find(expense => expense.id == params.id);
   const isSubmitting = navigation.state !== 'idle';
 
-  if (params.ud && !expenseData) {
+  if (params.id && !expenseData) {
     return <p>Invalid expense id.</p>;
     // throw new Response();
   }
