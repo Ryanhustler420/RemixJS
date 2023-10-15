@@ -1,4 +1,5 @@
-import { hash } from 'bcryptjs';
+import pkg from 'bcryptjs';
+const { hash } = pkg;
 
 import { prisma } from './database.server';
 
