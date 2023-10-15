@@ -3,9 +3,9 @@ import { requireUserSession } from "~/data/auth.server";
 import { getExpenses } from "~/data/expenses.server";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
-  await requireUserSession(request);
+  const userId = await requireUserSession(request);
 
-  const expenses = await getExpenses();
+  const expenses = await getExpenses(userId);
   if (!expenses || expenses.length == 0) {
     throw json(
       {
