@@ -12,6 +12,7 @@ export default function handleRequest(
   );
 
   responseHeaders.set("Content-Type", "text/html");
+  // responseHeaders.set("X-My-Header", "Some value");
 
   return new Response("<!DOCTYPE html>" + markup, {
     headers: responseHeaders,
